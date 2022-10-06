@@ -1,11 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const ItemCount = ({stock, initial}) => {
+const ItemCount = ({stock, initial, onAdd}) => {
     const [counter, setCounter] = useState(initial);
+    const [itemStock, setItemStock] = useState(stock);
+    const [itemCart, setItemCart] = useState(0); 
 
     const incrementarStock = () => {
-        if (counter < stock) {
+        if (counter < itemStock) {
             setCounter(counter + 1);
         }
     }
@@ -17,18 +19,31 @@ const ItemCount = ({stock, initial}) => {
     }
 
     const agregarAlCarrito = (counter) => {
-        console.log("Se agregaron: " + counter + " productos en el Carrito!");
+        if (counter <= itemStock) {
+            setItemStock(itemStock - counter);
+            setCounter(itemStock - counter);
+            setItemCart(counter);
+            onAdd(counter);
+        }   
     }
 
+    useEffect(() => {
+        setItemStock(stock);
+    }, [stock]);
+
     return(
-        <div>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary" onClick={() => {decrementarStock()}}>-</button>
-                <button type="button" class="btn btn-primary">{counter}</button>
-                <button type="button" class="btn btn-primary" onClick={() => {incrementarStock()}}>+</button>
-            </div>
-            <div>
-                <input type="button" className="btn btn-secondary" onClick={()=> {agregarAlCarrito(counter)}} value="Agregar al Carrito" />
+        <div className="container">
+            <div className="row">
+                <div className="d-flex justify-content-center">
+                    <div className="btn-group text-center" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-outline-secondary" onClick={() => {decrementarStock()}}>-</button>
+                        <button type="button" className="btn btn-outline-secondary">{counter}</button>
+                        <button type="button" className="btn btn-outline-secondary" onClick={() => {incrementarStock()}}>+</button>
+                    </div>
+                </div>
+                <div className="d-flex justify-content-center py-3">
+                    {itemCart === 0 ? <input type="button" className="btn btn-outline-secondary" onClick={()=> {agregarAlCarrito(counter)}} value="Agregar al Carrito" /> : <Link to={"/cart"} className="btn btn-outline-secondary">Finalizar Compra</Link>}
+                </div>
             </div>
         </div>
     )
