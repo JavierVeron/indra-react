@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ItemCount from "../ItemCount/ItemCount";
+import { cartContext } from "../CartContext/CartContext";
 
 const ItemDetail = ({item}) => {
+    const {addItem} = useContext(cartContext);
     const [stockProducto, setStockProducto] = useState(0);
 
     const onAdd = (quantityToAdd) => {
         setStockProducto(stockProducto - quantityToAdd);
-        console.log("Se agrego el Producto: " + item.title);
+        addItem(item, quantityToAdd);
     }
 
     useEffect(() => {
