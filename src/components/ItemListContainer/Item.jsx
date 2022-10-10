@@ -11,7 +11,6 @@ const Item = ({item}) => {
                         <h5 className="card-title text-center">{item.title}</h5>
                         <p className="card-text text-center">{item.description}</p>
                         <p className="card-text text-center"><b>${item.price}</b></p>
-                        <p className="fw-light text-center">Stock: {item.stock}</p>
                     </div>
                 </div>
             </Link>

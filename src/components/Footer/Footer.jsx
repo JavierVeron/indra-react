@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -11,13 +12,13 @@ const Footer = () => {
                     <div className="col-md-6">
                         <ul className="nav justify-content-end">
                             <li className="nav-item">
-                                <a className="nav-link text-dark fw-bold text-decoration-none" href="#">Condiciones de uso</a>
+                                <Link className="nav-link text-dark fw-bold text-decoration-none" to={"/"}>Condiciones de uso</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-dark fw-bold text-decoration-none" href="#">Política de privacidad</a>
+                                <Link className="nav-link text-dark fw-bold text-decoration-none" to={"/"}>Política de privacidad</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-dark fw-bold text-decoration-none" href="#">Política de Cookies</a>
+                                <Link className="nav-link text-dark fw-bold text-decoration-none" to={"/"}>Política de Cookies</Link>
                             </li>
                         </ul>
                     </div>
